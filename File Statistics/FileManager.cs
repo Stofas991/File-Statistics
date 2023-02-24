@@ -14,6 +14,7 @@ namespace File_Statistics
         public string Name;
         public string fileContent = string.Empty;
         public string filePath = string.Empty;
+        public string savePath = string.Empty;
 
         public FileManager()
         {
@@ -30,6 +31,7 @@ namespace File_Statistics
                 {
                     //Get the path of specified file
                     filePath = openFileDialog.FileName;
+                    Name = openFileDialog.FileName;
 
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
@@ -42,9 +44,23 @@ namespace File_Statistics
             }
         }
 
-        public void displayData()
+        //Function to copy opened file into directory selected
+        public void Copy()
         {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = Name;
+                saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                saveFileDialog.FileName = Name + " - Copy";
+                saveFileDialog.Title = "Save an text file";
+                saveFileDialog.RestoreDirectory = true;
 
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(saveFileDialog.FileName, fileContent);
+                    savePath = saveFileDialog.FileName;
+                }
+            }
         }
     }
 

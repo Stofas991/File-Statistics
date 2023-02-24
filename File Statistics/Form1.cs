@@ -27,6 +27,7 @@ namespace File_Statistics
             EditFile = new FileManager();
             NoFileIndicator.ForeColor = Color.Green;
             NoFileIndicator.Text = "File Selected - Starting to analyse";
+            CopyButton.Enabled = true;
         }
 
         private void CopyButton_Click(object sender, EventArgs e)

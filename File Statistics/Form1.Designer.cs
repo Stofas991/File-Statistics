@@ -64,14 +64,16 @@
             // 
             // CopyButton
             // 
+            this.CopyButton.BackColor = System.Drawing.SystemColors.Control;
             this.CopyButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CopyButton.Enabled = false;
             this.CopyButton.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.CopyButton.Location = new System.Drawing.Point(167, 205);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(75, 23);
             this.CopyButton.TabIndex = 4;
             this.CopyButton.Text = "Save as...";
-            this.CopyButton.UseVisualStyleBackColor = true;
+            this.CopyButton.UseVisualStyleBackColor = false;
             this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // label2
@@ -152,6 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(551, 279);
             this.Controls.Add(this.LineCount);
             this.Controls.Add(this.CharCount);

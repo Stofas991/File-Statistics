@@ -38,6 +38,9 @@
             this.WordCount = new System.Windows.Forms.Label();
             this.CharCount = new System.Windows.Forms.Label();
             this.LineCount = new System.Windows.Forms.Label();
+            this.CharLabel = new System.Windows.Forms.Label();
+            this.WordLabel = new System.Windows.Forms.Label();
+            this.LineLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -85,7 +88,6 @@
             this.label2.Size = new System.Drawing.Size(61, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Copy file:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // NoFileIndicator
             // 
@@ -98,7 +100,6 @@
             this.NoFileIndicator.Size = new System.Drawing.Size(142, 22);
             this.NoFileIndicator.TabIndex = 6;
             this.NoFileIndicator.Text = "No file selected";
-            this.NoFileIndicator.Click += new System.EventHandler(this.label3_Click);
             // 
             // CopyIndicator
             // 
@@ -118,7 +119,6 @@
             this.SentenceCount.Size = new System.Drawing.Size(138, 16);
             this.SentenceCount.TabIndex = 8;
             this.SentenceCount.Text = "Number of sentences: ";
-            this.SentenceCount.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // WordCount
             // 
@@ -150,12 +150,46 @@
             this.LineCount.TabIndex = 11;
             this.LineCount.Text = "Number of lines";
             // 
+            // CharLabel
+            // 
+            this.CharLabel.AutoSize = true;
+            this.CharLabel.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.CharLabel.Location = new System.Drawing.Point(183, 127);
+            this.CharLabel.Name = "CharLabel";
+            this.CharLabel.Size = new System.Drawing.Size(14, 16);
+            this.CharLabel.TabIndex = 12;
+            this.CharLabel.Text = "0";
+            this.CharLabel.Click += new System.EventHandler(this.CharLabel_Click);
+            // 
+            // WordLabel
+            // 
+            this.WordLabel.AutoSize = true;
+            this.WordLabel.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.WordLabel.Location = new System.Drawing.Point(183, 94);
+            this.WordLabel.Name = "WordLabel";
+            this.WordLabel.Size = new System.Drawing.Size(14, 16);
+            this.WordLabel.TabIndex = 13;
+            this.WordLabel.Text = "0";
+            // 
+            // LineLabel
+            // 
+            this.LineLabel.AutoSize = true;
+            this.LineLabel.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.LineLabel.Location = new System.Drawing.Point(183, 160);
+            this.LineLabel.Name = "LineLabel";
+            this.LineLabel.Size = new System.Drawing.Size(14, 16);
+            this.LineLabel.TabIndex = 14;
+            this.LineLabel.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(551, 279);
+            this.Controls.Add(this.LineLabel);
+            this.Controls.Add(this.WordLabel);
+            this.Controls.Add(this.CharLabel);
             this.Controls.Add(this.LineCount);
             this.Controls.Add(this.CharCount);
             this.Controls.Add(this.WordCount);
@@ -168,7 +202,6 @@
             this.Controls.Add(this.OpenButton);
             this.Name = "Form1";
             this.Text = "Hello";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,6 +218,9 @@
         private System.Windows.Forms.Label WordCount;
         private System.Windows.Forms.Label CharCount;
         private System.Windows.Forms.Label LineCount;
+        private System.Windows.Forms.Label CharLabel;
+        private System.Windows.Forms.Label WordLabel;
+        private System.Windows.Forms.Label LineLabel;
     }
 }
 

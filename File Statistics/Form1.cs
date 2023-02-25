@@ -16,6 +16,7 @@ namespace File_Statistics
     public partial class Form1 : Form
     {
         FileManager EditFile;
+        Analyser Analyser;
         public Form1()
         {
             InitializeComponent();
@@ -24,10 +25,22 @@ namespace File_Statistics
 
         public void OpenButton_Click(object sender, EventArgs e)
         {
+            //initialising FileManager
             EditFile = new FileManager();
             NoFileIndicator.ForeColor = Color.Green;
-            NoFileIndicator.Text = "File Selected - Starting to analyse";
+            NoFileIndicator.Text = "File Selected - Analysing";
             CopyButton.Enabled = true;
+
+            //Initialising Analyser
+            Analyser = new Analyser(EditFile.fileContent);
+
+            //counting characters
+            Analyser.CountChars();
+            CharLabel.Text = Analyser.characters.ToString();
+
+            //counting lines
+            Analyser.CountLines();
+            LineLabel.Text = Analyser.lines.ToString();
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
@@ -36,22 +49,8 @@ namespace File_Statistics
             CopyIndicator.ForeColor = Color.Green;
             CopyIndicator.Text = "File succesfully copied into: " + EditFile.savePath;
         }
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
+        private void CharLabel_Click(object sender, EventArgs e)
         {
 
         }

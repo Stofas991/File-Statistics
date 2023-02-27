@@ -19,14 +19,13 @@ namespace File_Statistics
         {
             this.FileContent = FileContent;
         }
-        public void CountChars()
+        public void Count()
         {
             characters = FileContent.Length;
-        }
-        
-        public void CountLines()
-        {
             lines = FileContent.Split('\n').Length;
+            words = FileContent.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries).Length;
+            sentences = FileContent.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Length - 1;
+
         }
     }
 

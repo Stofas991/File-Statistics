@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace File_Statistics
 {
     
@@ -17,6 +18,7 @@ namespace File_Statistics
     {
         FileManager EditFile;
         Analyser Analyser;
+        Actions Actions;
         public Form1()
         {
             InitializeComponent();
@@ -30,22 +32,25 @@ namespace File_Statistics
             NoFileIndicator.ForeColor = Color.Green;
             NoFileIndicator.Text = "File Selected - Analysing";
             CopyButton.Enabled = true;
+            RemoveDiacritics.Enabled = true;
 
             //Initialising Analyser
             Analyser = new Analyser(EditFile.fileContent);
 
-            //counting characters
-            Analyser.CountChars();
+            //counting All values
+            Analyser.Count();
             CharLabel.Text = Analyser.characters.ToString();
-
-            //counting lines
-            Analyser.CountLines();
             LineLabel.Text = Analyser.lines.ToString();
+            WordLabel.Text = Analyser.words.ToString();
+            SentenceLabel.Text = Analyser.sentences.ToString();
+
+            //Initialising Action class
+            Actions = new Actions(EditFile.fileContent);
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-            EditFile.Copy();
+            EditFile.Save();
             CopyIndicator.ForeColor = Color.Green;
             CopyIndicator.Text = "File succesfully copied into: " + EditFile.savePath;
         }
@@ -53,6 +58,13 @@ namespace File_Statistics
         private void CharLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void RemoveDiacritics_Click(object sender, EventArgs e)
+        {
+            Actions.RemoveDiacritics();
+            EditFile.fileContent = Actions.FileContent;
+            EditFile.Save();
         }
     }
 }

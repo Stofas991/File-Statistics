@@ -41,6 +41,8 @@
             this.CharLabel = new System.Windows.Forms.Label();
             this.WordLabel = new System.Windows.Forms.Label();
             this.LineLabel = new System.Windows.Forms.Label();
+            this.SentenceLabel = new System.Windows.Forms.Label();
+            this.RemoveDiacritics = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -181,12 +183,38 @@
             this.LineLabel.TabIndex = 14;
             this.LineLabel.Text = "0";
             // 
+            // SentenceLabel
+            // 
+            this.SentenceLabel.AutoSize = true;
+            this.SentenceLabel.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.SentenceLabel.Location = new System.Drawing.Point(183, 62);
+            this.SentenceLabel.Name = "SentenceLabel";
+            this.SentenceLabel.Size = new System.Drawing.Size(14, 16);
+            this.SentenceLabel.TabIndex = 15;
+            this.SentenceLabel.Text = "0";
+            // 
+            // RemoveDiacritics
+            // 
+            this.RemoveDiacritics.BackColor = System.Drawing.SystemColors.Control;
+            this.RemoveDiacritics.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RemoveDiacritics.Enabled = false;
+            this.RemoveDiacritics.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.RemoveDiacritics.Location = new System.Drawing.Point(264, 205);
+            this.RemoveDiacritics.Name = "RemoveDiacritics";
+            this.RemoveDiacritics.Size = new System.Drawing.Size(138, 23);
+            this.RemoveDiacritics.TabIndex = 16;
+            this.RemoveDiacritics.Text = "Remove diacritics";
+            this.RemoveDiacritics.UseVisualStyleBackColor = false;
+            this.RemoveDiacritics.Click += new System.EventHandler(this.RemoveDiacritics_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(551, 279);
+            this.Controls.Add(this.RemoveDiacritics);
+            this.Controls.Add(this.SentenceLabel);
             this.Controls.Add(this.LineLabel);
             this.Controls.Add(this.WordLabel);
             this.Controls.Add(this.CharLabel);
@@ -201,7 +229,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpenButton);
             this.Name = "Form1";
-            this.Text = "Hello";
+            this.Text = "Analyser";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,6 +249,8 @@
         private System.Windows.Forms.Label CharLabel;
         private System.Windows.Forms.Label WordLabel;
         private System.Windows.Forms.Label LineLabel;
+        private System.Windows.Forms.Label SentenceLabel;
+        private System.Windows.Forms.Button RemoveDiacritics;
     }
 }
 

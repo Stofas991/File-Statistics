@@ -22,7 +22,7 @@ namespace File_Statistics
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 //filters and initial directories
-                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.InitialDirectory = @"../"+Directory.GetCurrentDirectory();
                 openFileDialog.Filter = "txt files (*.txt)|*.txt";    
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
@@ -36,7 +36,7 @@ namespace File_Statistics
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
 
-                    using (StreamReader reader = new StreamReader(fileStream))
+                    using (StreamReader reader = new StreamReader(fileStream, Encoding.Default))
                     {
                         fileContent = reader.ReadToEnd();
                     }
@@ -45,7 +45,7 @@ namespace File_Statistics
         }
 
         //Function to copy opened file into directory selected
-        public void Copy()
+        public void Save()
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {

@@ -33,6 +33,7 @@ namespace File_Statistics
             NoFileIndicator.Text = "File Selected - Analysing";
             CopyButton.Enabled = true;
             RemoveDiacritics.Enabled = true;
+            RemoveLines.Enabled = true;
 
             //Initialising Analyser
             Analyser = new Analyser(EditFile.fileContent);
@@ -66,5 +67,7 @@ namespace File_Statistics
             EditFile.fileContent = Actions.FileContent;
             EditFile.Save();
         }
+
+
     }
 }

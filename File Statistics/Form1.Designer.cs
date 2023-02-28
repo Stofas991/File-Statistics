@@ -43,6 +43,7 @@
             this.LineLabel = new System.Windows.Forms.Label();
             this.SentenceLabel = new System.Windows.Forms.Label();
             this.RemoveDiacritics = new System.Windows.Forms.Button();
+            this.RemoveLines = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -207,12 +208,27 @@
             this.RemoveDiacritics.UseVisualStyleBackColor = false;
             this.RemoveDiacritics.Click += new System.EventHandler(this.RemoveDiacritics_Click);
             // 
+            // RemoveLines
+            // 
+            this.RemoveLines.BackColor = System.Drawing.SystemColors.Control;
+            this.RemoveLines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RemoveLines.Enabled = false;
+            this.RemoveLines.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.RemoveLines.Location = new System.Drawing.Point(264, 248);
+            this.RemoveLines.Name = "RemoveLines";
+            this.RemoveLines.Size = new System.Drawing.Size(138, 23);
+            this.RemoveLines.TabIndex = 17;
+            this.RemoveLines.Text = "Remove empty lines";
+            this.RemoveLines.UseVisualStyleBackColor = false;
+            this.RemoveLines.Click += new System.EventHandler(this.RemoveLines_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(551, 279);
+            this.ClientSize = new System.Drawing.Size(1417, 612);
+            this.Controls.Add(this.RemoveLines);
             this.Controls.Add(this.RemoveDiacritics);
             this.Controls.Add(this.SentenceLabel);
             this.Controls.Add(this.LineLabel);
@@ -251,6 +267,7 @@
         private System.Windows.Forms.Label LineLabel;
         private System.Windows.Forms.Label SentenceLabel;
         private System.Windows.Forms.Button RemoveDiacritics;
+        private System.Windows.Forms.Button RemoveLines;
     }
 }
 

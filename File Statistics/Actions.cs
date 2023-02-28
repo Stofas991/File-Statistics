@@ -9,9 +9,9 @@ namespace File_Statistics
 {
     internal class Actions
     {
-        Hashtable Diacritics = new Hashtable() { { 'á', 'a' }, { 'é', 'e' }, { 'ě', 'e' }, { "í", "i" }, { "ž", "z" },
-                                                { "ý", "y" }, { "ó", "o" }, { "ú", "u" }, { "ů", "u" }, { "š", "s" }, 
-                                                { "ř", "r" }, { "ď", "d" }, { "ť", "t" }, { "ň", "n" }, { "č", "c" }};
+        Dictionary<char, char> Diacritics = new Dictionary<char, char>() { { 'á', 'a' }, { 'é', 'e' }, { 'ě', 'e' }, { 'í', 'i' }, { 'ž', 'z' },
+                                                { 'ý', 'y' }, { 'ó', 'o' }, { 'ú', 'u' }, { 'ů', 'u' }, { 'š', 's' }, 
+                                                { 'ř', 'r' }, { 'ď', 'd' }, { 'ť', 't' }, { 'ň', 'n' }, { 'č', 'c' }};
         public string FileContent = string.Empty;
 
         public Actions(string FileContent)
@@ -21,10 +21,23 @@ namespace File_Statistics
 
         public void RemoveDiacritics()
         {
-            foreach(DictionaryEntry de in Diacritics)
+            StringBuilder NewFileContent = new StringBuilder(FileContent);
+            for (int i = 0; i < FileContent.Length; i++)
             {
-                FileContent = FileContent.Replace(de.Key.ToString(), de.Value.ToString());
-            }
+                char c = FileContent[i];
+                if (Diacritics.ContainsKey(c))
+                {
+
+                    NewFileContent[i] = Diacritics[c];
+                }
+                else if (Diacritics.ContainsKey(Char.ToLower(c)))
+                {
+                    NewFileContent[i] = Char.ToUpper(Diacritics[Char.ToLower(c)]);
+                }
+            }    
+            FileContent = NewFileContent.ToString();
         }
+
+
     }
 }

@@ -68,6 +68,11 @@ namespace File_Statistics
             EditFile.Save();
         }
 
-
+        private void RemoveLines_Click(object sender, EventArgs e)
+        {
+            Actions.RemoveEmptyLines();
+            EditFile.fileContent = Actions.FileContent;
+            EditFile.Save();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,6 +39,10 @@ namespace File_Statistics
             FileContent = NewFileContent.ToString();
         }
 
-
+        public void RemoveEmptyLines()
+        {
+            var array = FileContent.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            FileContent = string.Join("\n", array);
+        }
     }
 }

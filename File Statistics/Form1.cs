@@ -22,7 +22,8 @@ namespace File_Statistics
         public Form1()
         {
             InitializeComponent();
-            
+            textBox1.ScrollBars = ScrollBars.Both;
+            textBox1.WordWrap = false;
         }
 
         public void OpenButton_Click(object sender, EventArgs e)
@@ -35,8 +36,7 @@ namespace File_Statistics
             RemoveDiacritics.Enabled = true;
             RemoveLines.Enabled = true;
             RemoveSpaces.Enabled = true;
-            progressBar.Enabled = true;
-            progressBar.Maximum = EditFile.fileContent.Length;
+
 
             //Initialising Analyser
             Analyser = new Analyser(EditFile.fileContent);
@@ -62,9 +62,15 @@ namespace File_Statistics
 
         private void RemoveDiacritics_Click(object sender, EventArgs e)
         {
-            Actions.RemoveDiacritics();
+            progressBar.Visible = true;
+            progressBar.Value = 0;
+            progressBar.Maximum = EditFile.fileContent.Length;
+
+            Actions.RemoveDiacritics(progressBar);
             EditFile.fileContent = Actions.FileContent;
+            ActualizeLabels();
             EditFile.Save();
+            progressBar.Visible = false;
         }
 
         private void RemoveLines_Click(object sender, EventArgs e)
@@ -77,6 +83,9 @@ namespace File_Statistics
         private void RemoveSpaces_Click(object sender, EventArgs e)
         {
             progressBar.Visible = true;
+            progressBar.Value = 0;
+            progressBar.Maximum = EditFile.fileContent.Length;
+
             Actions.RemovePunctuation(progressBar);
             EditFile.fileContent = Actions.FileContent;
             ActualizeLabels();
@@ -87,6 +96,7 @@ namespace File_Statistics
         //function to set labels to their new values
         private void ActualizeLabels()
         {
+            textBox1.Text = EditFile.fileContent;
             Analyser.Count(EditFile.fileContent);
             CharLabel.Text = Analyser.characters.ToString();
             LineLabel.Text = Analyser.lines.ToString();

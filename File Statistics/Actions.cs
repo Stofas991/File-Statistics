@@ -22,7 +22,7 @@ namespace File_Statistics
             this.FileContent = FileContent;
         }
 
-        public void RemoveDiacritics()
+        public void RemoveDiacritics(ProgressBar progressBar)
         {
             StringBuilder NewFileContent = new StringBuilder(FileContent);
             for (int i = 0; i < FileContent.Length; i++)
@@ -37,8 +37,10 @@ namespace File_Statistics
                 {
                     NewFileContent[i] = Char.ToUpper(Diacritics[Char.ToLower(c)]);
                 }
+                progressBar.PerformStep();
             }    
             FileContent = NewFileContent.ToString();
+
         }
 
         public void RemoveEmptyLines()
@@ -51,7 +53,6 @@ namespace File_Statistics
         {
             var NewFileContent = new StringBuilder();
             bool NextUpper = true;
-            Console.WriteLine(FileContent);
             for (int i=0; i < FileContent.Length; i++)
             {
                 char c = FileContent[i];

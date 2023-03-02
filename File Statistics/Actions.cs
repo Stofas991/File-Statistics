@@ -12,6 +12,7 @@ namespace File_Statistics
 {
     internal class Actions
     {
+        //dictionary with special czech characters
         Dictionary<char, char> Diacritics = new Dictionary<char, char>() { { 'á', 'a' }, { 'é', 'e' }, { 'ě', 'e' }, { 'í', 'i' }, { 'ž', 'z' },
                                                 { 'ý', 'y' }, { 'ó', 'o' }, { 'ú', 'u' }, { 'ů', 'u' }, { 'š', 's' }, 
                                                 { 'ř', 'r' }, { 'ď', 'd' }, { 'ť', 't' }, { 'ň', 'n' }, { 'č', 'c' }};
@@ -24,19 +25,22 @@ namespace File_Statistics
 
         public void RemoveDiacritics(ProgressBar progressBar)
         {
+            //using stringbuilder to create new string
             StringBuilder NewFileContent = new StringBuilder(FileContent);
             for (int i = 0; i < FileContent.Length; i++)
             {
                 char c = FileContent[i];
+                //check if character is in dictionary
                 if (Diacritics.ContainsKey(c))
                 {
-
+                    //setting new character
                     NewFileContent[i] = Diacritics[c];
                 }
                 else if (Diacritics.ContainsKey(Char.ToLower(c)))
                 {
                     NewFileContent[i] = Char.ToUpper(Diacritics[Char.ToLower(c)]);
                 }
+                //performing one step in progress bar
                 progressBar.PerformStep();
             }    
             FileContent = NewFileContent.ToString();
@@ -45,6 +49,7 @@ namespace File_Statistics
 
         public void RemoveEmptyLines()
         {
+            
             var array = FileContent.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             FileContent = string.Join("\n", array);
         }

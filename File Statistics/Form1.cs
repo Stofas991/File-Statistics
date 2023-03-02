@@ -51,23 +51,20 @@ namespace File_Statistics
         private void CopyButton_Click(object sender, EventArgs e)
         {
             EditFile.Save();
-            CopyIndicator.ForeColor = Color.Green;
-            CopyIndicator.Text = "File succesfully copied into: " + EditFile.savePath;
-        }
-
-        private void CharLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void RemoveDiacritics_Click(object sender, EventArgs e)
         {
+            //preparing progress bar
             progressBar.Visible = true;
             progressBar.Value = 0;
             progressBar.Maximum = EditFile.fileContent.Length;
 
+            //calling function from action class
             Actions.RemoveDiacritics(progressBar);
             EditFile.fileContent = Actions.FileContent;
+            
+            //actualising and saving, hiding progress bar
             ActualizeLabels();
             EditFile.Save();
             progressBar.Visible = false;
@@ -75,6 +72,7 @@ namespace File_Statistics
 
         private void RemoveLines_Click(object sender, EventArgs e)
         {
+            
             Actions.RemoveEmptyLines();
             EditFile.fileContent = Actions.FileContent;
             ActualizeLabels();
@@ -96,6 +94,7 @@ namespace File_Statistics
         //function to set labels to their new values
         private void ActualizeLabels()
         {
+            //putting text in preview window
             textBox1.Text = EditFile.fileContent;
             Analyser.Count(EditFile.fileContent);
             CharLabel.Text = Analyser.characters.ToString();

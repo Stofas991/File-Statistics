@@ -154,7 +154,6 @@
             this.CharLabel.Size = new System.Drawing.Size(14, 16);
             this.CharLabel.TabIndex = 12;
             this.CharLabel.Text = "0";
-            this.CharLabel.Click += new System.EventHandler(this.CharLabel_Click);
             // 
             // WordLabel
             // 

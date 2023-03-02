@@ -36,7 +36,7 @@ namespace File_Statistics
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
 
-                    using (StreamReader reader = new StreamReader(fileStream, Encoding.Default))
+                    using (StreamReader reader = new StreamReader(fileStream, Encoding.UTF8))
                     {
                         fileContent = reader.ReadToEnd();
                     }

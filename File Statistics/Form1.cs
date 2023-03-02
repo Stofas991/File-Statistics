@@ -34,16 +34,15 @@ namespace File_Statistics
             CopyButton.Enabled = true;
             RemoveDiacritics.Enabled = true;
             RemoveLines.Enabled = true;
+            RemoveSpaces.Enabled = true;
+            progressBar.Enabled = true;
+            progressBar.Maximum = EditFile.fileContent.Length;
 
             //Initialising Analyser
             Analyser = new Analyser(EditFile.fileContent);
 
-            //counting All values
-            Analyser.Count();
-            CharLabel.Text = Analyser.characters.ToString();
-            LineLabel.Text = Analyser.lines.ToString();
-            WordLabel.Text = Analyser.words.ToString();
-            SentenceLabel.Text = Analyser.sentences.ToString();
+            //calculate and set new values
+            ActualizeLabels();
 
             //Initialising Action class
             Actions = new Actions(EditFile.fileContent);
@@ -72,7 +71,29 @@ namespace File_Statistics
         {
             Actions.RemoveEmptyLines();
             EditFile.fileContent = Actions.FileContent;
+            ActualizeLabels();
             EditFile.Save();
         }
+        private void RemoveSpaces_Click(object sender, EventArgs e)
+        {
+            progressBar.Visible = true;
+            Actions.RemovePunctuation(progressBar);
+            EditFile.fileContent = Actions.FileContent;
+            ActualizeLabels();
+            EditFile.Save();
+            progressBar.Visible = false;
+        }
+
+        //function to set labels to their new values
+        private void ActualizeLabels()
+        {
+            Analyser.Count(EditFile.fileContent);
+            CharLabel.Text = Analyser.characters.ToString();
+            LineLabel.Text = Analyser.lines.ToString();
+            WordLabel.Text = Analyser.words.ToString();
+            SentenceLabel.Text = Analyser.sentences.ToString();
+        }
+
+
     }
 }

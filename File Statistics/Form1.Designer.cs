@@ -44,6 +44,8 @@
             this.SentenceLabel = new System.Windows.Forms.Label();
             this.RemoveDiacritics = new System.Windows.Forms.Button();
             this.RemoveLines = new System.Windows.Forms.Button();
+            this.RemoveSpaces = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -222,12 +224,38 @@
             this.RemoveLines.UseVisualStyleBackColor = false;
             this.RemoveLines.Click += new System.EventHandler(this.RemoveLines_Click);
             // 
+            // RemoveSpaces
+            // 
+            this.RemoveSpaces.BackColor = System.Drawing.SystemColors.Control;
+            this.RemoveSpaces.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RemoveSpaces.Enabled = false;
+            this.RemoveSpaces.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.RemoveSpaces.Location = new System.Drawing.Point(264, 289);
+            this.RemoveSpaces.Name = "RemoveSpaces";
+            this.RemoveSpaces.Size = new System.Drawing.Size(138, 43);
+            this.RemoveSpaces.TabIndex = 18;
+            this.RemoveSpaces.Text = "Remove Spaces and punctuation";
+            this.RemoveSpaces.UseVisualStyleBackColor = false;
+            this.RemoveSpaces.Click += new System.EventHandler(this.RemoveSpaces_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Enabled = false;
+            this.progressBar.Location = new System.Drawing.Point(473, 289);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(446, 28);
+            this.progressBar.Step = 1;
+            this.progressBar.TabIndex = 19;
+            this.progressBar.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1417, 612);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.RemoveSpaces);
             this.Controls.Add(this.RemoveLines);
             this.Controls.Add(this.RemoveDiacritics);
             this.Controls.Add(this.SentenceLabel);
@@ -268,6 +296,8 @@
         private System.Windows.Forms.Label SentenceLabel;
         private System.Windows.Forms.Button RemoveDiacritics;
         private System.Windows.Forms.Button RemoveLines;
+        private System.Windows.Forms.Button RemoveSpaces;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

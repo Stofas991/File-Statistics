@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace File_Statistics
 {
@@ -43,6 +45,43 @@ namespace File_Statistics
         {
             var array = FileContent.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             FileContent = string.Join("\n", array);
+        }
+
+        public void RemovePunctuation(ProgressBar progressBar)
+        {
+            var NewFileContent = new StringBuilder();
+            bool NextUpper = true;
+            Console.WriteLine(FileContent);
+            for (int i=0; i < FileContent.Length; i++)
+            {
+                char c = FileContent[i];
+
+                if (!char.IsPunctuation(c))
+                {
+                    if (c == ' ')
+                        NextUpper = true;       
+
+                    else if (c == '\n' || c == '\t')
+                    {
+                        NextUpper = true;
+                        NewFileContent.Append(c);
+                    }
+
+                    else
+                    {
+                        if (NextUpper)
+                        { 
+                            NewFileContent.Append(char.ToUpper(c, new System.Globalization.CultureInfo("cs-CZ", false)));
+                            NextUpper = false;
+                        }
+                        else
+                            NewFileContent.Append(char.ToLower(c, new System.Globalization.CultureInfo("cs-CZ", false)));
+
+                    }
+                }
+                progressBar.PerformStep();
+            }
+            FileContent = NewFileContent.ToString();
         }
     }
 }

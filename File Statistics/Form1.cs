@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace File_Statistics
         FileManager EditFile;
         Analyser Analyser;
         Actions Actions;
+        private const string ACTION_DIACRITIC = "DIACRITIC";
+        private const string ACTION_PUNCTUATION = "PUNCTUATION";
         public Form1()
         {
             InitializeComponent();
@@ -56,18 +59,14 @@ namespace File_Statistics
         private void RemoveDiacritics_Click(object sender, EventArgs e)
         {
             //preparing progress bar
+            DisableButtons();
             progressBar.Visible = true;
+            cancelAction.Visible = true;
+            cancelAction.Enabled = true;
             progressBar.Value = 0;
             progressBar.Maximum = EditFile.fileContent.Length;
-
             //calling function from action class
-            Actions.RemoveDiacritics(progressBar);
-            EditFile.fileContent = Actions.FileContent;
-            
-            //actualising and saving, hiding progress bar
-            ActualizeLabels();
-            EditFile.Save();
-            progressBar.Visible = false;
+            backgroundWorker1.RunWorkerAsync(argument: ACTION_DIACRITIC);
         }
 
         private void RemoveLines_Click(object sender, EventArgs e)
@@ -80,15 +79,14 @@ namespace File_Statistics
         }
         private void RemoveSpaces_Click(object sender, EventArgs e)
         {
+            DisableButtons();
             progressBar.Visible = true;
+            cancelAction.Visible = true;
+            cancelAction.Enabled = true;
             progressBar.Value = 0;
             progressBar.Maximum = EditFile.fileContent.Length;
 
-            Actions.RemovePunctuation(progressBar);
-            EditFile.fileContent = Actions.FileContent;
-            ActualizeLabels();
-            EditFile.Save();
-            progressBar.Visible = false;
+            backgroundWorker1.RunWorkerAsync(argument: ACTION_PUNCTUATION);
         }
 
         //function to set labels to their new values
@@ -103,6 +101,59 @@ namespace File_Statistics
             SentenceLabel.Text = Analyser.sentences.ToString();
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            switch(e.Argument)
+            {
+                case ACTION_DIACRITIC:
+                    Actions.RemoveDiacritics(progressBar, sender as BackgroundWorker);
+                    break;
 
+                case ACTION_PUNCTUATION:
+                    Actions.RemovePunctuation(progressBar, sender as BackgroundWorker);
+                    break;
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            EditFile.fileContent = Actions.FileContent;
+            //actualising and saving, hiding progress bar
+            ActualizeLabels();
+            EditFile.Save();
+            EnableButtons();
+        }
+
+        private void DisableButtons()
+        {
+            RemoveDiacritics.Enabled = false;
+            RemoveLines.Enabled = false;
+            CopyButton.Enabled = false;
+            RemoveSpaces.Enabled = false;
+            OpenButton.Enabled = false;
+        }
+
+        private void EnableButtons()
+        {
+            RemoveDiacritics.Enabled = true;
+            RemoveLines.Enabled = true;
+            CopyButton.Enabled = true;
+            RemoveSpaces.Enabled = true;
+            OpenButton.Enabled = true;
+
+        }
+
+        private void cancelAction_Click(object sender, EventArgs e)
+        {
+            if(backgroundWorker1.WorkerSupportsCancellation)
+            {
+                backgroundWorker1.CancelAsync();
+            }
+        }
     }
 }

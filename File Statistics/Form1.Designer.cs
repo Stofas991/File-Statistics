@@ -46,6 +46,8 @@
             this.RemoveSpaces = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.cancelAction = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -76,7 +78,7 @@
             this.CopyButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CopyButton.Enabled = false;
             this.CopyButton.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.CopyButton.Location = new System.Drawing.Point(1190, 434);
+            this.CopyButton.Location = new System.Drawing.Point(1190, 350);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(157, 61);
             this.CopyButton.TabIndex = 4;
@@ -191,7 +193,7 @@
             this.RemoveDiacritics.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RemoveDiacritics.Enabled = false;
             this.RemoveDiacritics.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RemoveDiacritics.Location = new System.Drawing.Point(1190, 54);
+            this.RemoveDiacritics.Location = new System.Drawing.Point(1190, 40);
             this.RemoveDiacritics.Name = "RemoveDiacritics";
             this.RemoveDiacritics.Size = new System.Drawing.Size(157, 61);
             this.RemoveDiacritics.TabIndex = 16;
@@ -205,7 +207,7 @@
             this.RemoveLines.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RemoveLines.Enabled = false;
             this.RemoveLines.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RemoveLines.Location = new System.Drawing.Point(1190, 166);
+            this.RemoveLines.Location = new System.Drawing.Point(1190, 137);
             this.RemoveLines.Name = "RemoveLines";
             this.RemoveLines.Size = new System.Drawing.Size(157, 61);
             this.RemoveLines.TabIndex = 17;
@@ -219,7 +221,7 @@
             this.RemoveSpaces.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RemoveSpaces.Enabled = false;
             this.RemoveSpaces.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RemoveSpaces.Location = new System.Drawing.Point(1190, 302);
+            this.RemoveSpaces.Location = new System.Drawing.Point(1190, 246);
             this.RemoveSpaces.Name = "RemoveSpaces";
             this.RemoveSpaces.Size = new System.Drawing.Size(157, 61);
             this.RemoveSpaces.TabIndex = 18;
@@ -230,9 +232,9 @@
             // progressBar
             // 
             this.progressBar.Enabled = false;
-            this.progressBar.Location = new System.Drawing.Point(500, 512);
+            this.progressBar.Location = new System.Drawing.Point(326, 487);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(446, 28);
+            this.progressBar.Size = new System.Drawing.Size(787, 28);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 19;
             this.progressBar.Visible = false;
@@ -240,12 +242,35 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.textBox1.Location = new System.Drawing.Point(317, 54);
+            this.textBox1.Location = new System.Drawing.Point(326, 40);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(787, 441);
             this.textBox1.TabIndex = 20;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // cancelAction
+            // 
+            this.cancelAction.BackColor = System.Drawing.SystemColors.Control;
+            this.cancelAction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cancelAction.Enabled = false;
+            this.cancelAction.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cancelAction.Location = new System.Drawing.Point(1119, 487);
+            this.cancelAction.Name = "cancelAction";
+            this.cancelAction.Size = new System.Drawing.Size(74, 28);
+            this.cancelAction.TabIndex = 21;
+            this.cancelAction.Text = "Zrušit";
+            this.cancelAction.UseVisualStyleBackColor = false;
+            this.cancelAction.Visible = false;
+            this.cancelAction.Click += new System.EventHandler(this.cancelAction_Click);
             // 
             // Form1
             // 
@@ -253,6 +278,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1417, 612);
+            this.Controls.Add(this.cancelAction);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.RemoveSpaces);
@@ -297,6 +323,8 @@
         private System.Windows.Forms.Button RemoveSpaces;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.TextBox textBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button cancelAction;
     }
 }
 

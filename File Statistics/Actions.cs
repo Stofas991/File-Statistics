@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,15 +17,16 @@ namespace File_Statistics
         Dictionary<char, char> Diacritics = new Dictionary<char, char>() { { 'á', 'a' }, { 'é', 'e' }, { 'ě', 'e' }, { 'í', 'i' }, { 'ž', 'z' },
                                                 { 'ý', 'y' }, { 'ó', 'o' }, { 'ú', 'u' }, { 'ů', 'u' }, { 'š', 's' }, 
                                                 { 'ř', 'r' }, { 'ď', 'd' }, { 'ť', 't' }, { 'ň', 'n' }, { 'č', 'c' }};
-        public string FileContent = string.Empty;
+        public string FileContent { get; set; }
 
         public Actions(string FileContent)
         {
             this.FileContent = FileContent;
         }
 
-        public void RemoveDiacritics(ProgressBar progressBar)
+        public void RemoveDiacritics(ProgressBar progressBar, BackgroundWorker bw)
         {
+            int tenthPercent = FileContent.Length / 10000;
             //using stringbuilder to create new string
             StringBuilder NewFileContent = new StringBuilder(FileContent);
             for (int i = 0; i < FileContent.Length; i++)
@@ -41,8 +43,13 @@ namespace File_Statistics
                     NewFileContent[i] = Char.ToUpper(Diacritics[Char.ToLower(c)]);
                 }
                 //performing one step in progress bar
-                progressBar.PerformStep();
-            }    
+                if (i % tenthPercent == 0)
+                    bw.ReportProgress(i);
+                if (bw.CancellationPending)
+                {
+                    break;
+                }
+            }
             FileContent = NewFileContent.ToString();
 
         }
@@ -50,12 +57,14 @@ namespace File_Statistics
         public void RemoveEmptyLines()
         {
             
-            var array = FileContent.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            FileContent = string.Join("\n", array);
+            var array = FileContent.Split((Environment.NewLine + Environment.NewLine).ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            FileContent = string.Join(Environment.NewLine, array);
+            
         }
 
-        public void RemovePunctuation(ProgressBar progressBar)
+        public void RemovePunctuation(ProgressBar progressBar, BackgroundWorker bw)
         {
+            int tenthPercent = FileContent.Length / 1000;
             var NewFileContent = new StringBuilder();
             bool NextUpper = true;
             for (int i=0; i < FileContent.Length; i++)
@@ -85,7 +94,14 @@ namespace File_Statistics
 
                     }
                 }
-                progressBar.PerformStep();
+                //performing one step in progress bar
+                if (i % tenthPercent == 0)
+                    bw.ReportProgress(i);
+
+                if (bw.CancellationPending)
+                {
+                    break;
+                }
             }
             FileContent = NewFileContent.ToString();
         }

@@ -48,6 +48,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cancelAction = new System.Windows.Forms.Button();
+            this.Percentage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -110,80 +111,80 @@
             // SentenceCount
             // 
             this.SentenceCount.AutoSize = true;
-            this.SentenceCount.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.SentenceCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.SentenceCount.Location = new System.Drawing.Point(200, 566);
             this.SentenceCount.Name = "SentenceCount";
-            this.SentenceCount.Size = new System.Drawing.Size(65, 16);
+            this.SentenceCount.Size = new System.Drawing.Size(73, 17);
             this.SentenceCount.TabIndex = 8;
             this.SentenceCount.Text = "Počet vět:";
             // 
             // WordCount
             // 
             this.WordCount.AutoSize = true;
-            this.WordCount.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.WordCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.WordCount.Location = new System.Drawing.Point(478, 566);
             this.WordCount.Name = "WordCount";
-            this.WordCount.Size = new System.Drawing.Size(71, 16);
+            this.WordCount.Size = new System.Drawing.Size(80, 17);
             this.WordCount.TabIndex = 9;
             this.WordCount.Text = "Počet slov:";
             // 
             // CharCount
             // 
             this.CharCount.AutoSize = true;
-            this.CharCount.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.CharCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.CharCount.Location = new System.Drawing.Point(760, 566);
             this.CharCount.Name = "CharCount";
-            this.CharCount.Size = new System.Drawing.Size(84, 16);
+            this.CharCount.Size = new System.Drawing.Size(93, 17);
             this.CharCount.TabIndex = 10;
             this.CharCount.Text = "Počet znaků:";
             // 
             // LineCount
             // 
             this.LineCount.AutoSize = true;
-            this.LineCount.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.LineCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LineCount.Location = new System.Drawing.Point(1085, 566);
             this.LineCount.Name = "LineCount";
-            this.LineCount.Size = new System.Drawing.Size(81, 16);
+            this.LineCount.Size = new System.Drawing.Size(90, 17);
             this.LineCount.TabIndex = 11;
             this.LineCount.Text = "Počet řádků:";
             // 
             // CharLabel
             // 
             this.CharLabel.AutoSize = true;
-            this.CharLabel.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.CharLabel.Location = new System.Drawing.Point(850, 566);
+            this.CharLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.CharLabel.Location = new System.Drawing.Point(859, 566);
             this.CharLabel.Name = "CharLabel";
-            this.CharLabel.Size = new System.Drawing.Size(14, 16);
+            this.CharLabel.Size = new System.Drawing.Size(16, 17);
             this.CharLabel.TabIndex = 12;
             this.CharLabel.Text = "0";
             // 
             // WordLabel
             // 
             this.WordLabel.AutoSize = true;
-            this.WordLabel.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.WordLabel.Location = new System.Drawing.Point(555, 566);
+            this.WordLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.WordLabel.Location = new System.Drawing.Point(564, 566);
             this.WordLabel.Name = "WordLabel";
-            this.WordLabel.Size = new System.Drawing.Size(14, 16);
+            this.WordLabel.Size = new System.Drawing.Size(16, 17);
             this.WordLabel.TabIndex = 13;
             this.WordLabel.Text = "0";
             // 
             // LineLabel
             // 
             this.LineLabel.AutoSize = true;
-            this.LineLabel.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.LineLabel.Location = new System.Drawing.Point(1172, 566);
+            this.LineLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LineLabel.Location = new System.Drawing.Point(1181, 566);
             this.LineLabel.Name = "LineLabel";
-            this.LineLabel.Size = new System.Drawing.Size(14, 16);
+            this.LineLabel.Size = new System.Drawing.Size(16, 17);
             this.LineLabel.TabIndex = 14;
             this.LineLabel.Text = "0";
             // 
             // SentenceLabel
             // 
             this.SentenceLabel.AutoSize = true;
-            this.SentenceLabel.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.SentenceLabel.Location = new System.Drawing.Point(271, 566);
+            this.SentenceLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.SentenceLabel.Location = new System.Drawing.Point(279, 566);
             this.SentenceLabel.Name = "SentenceLabel";
-            this.SentenceLabel.Size = new System.Drawing.Size(14, 16);
+            this.SentenceLabel.Size = new System.Drawing.Size(16, 17);
             this.SentenceLabel.TabIndex = 15;
             this.SentenceLabel.Text = "0";
             // 
@@ -272,12 +273,24 @@
             this.cancelAction.Visible = false;
             this.cancelAction.Click += new System.EventHandler(this.cancelAction_Click);
             // 
+            // Percentage
+            // 
+            this.Percentage.AutoSize = true;
+            this.Percentage.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Percentage.Location = new System.Drawing.Point(680, 518);
+            this.Percentage.Name = "Percentage";
+            this.Percentage.Size = new System.Drawing.Size(29, 17);
+            this.Percentage.TabIndex = 22;
+            this.Percentage.Text = "0%";
+            this.Percentage.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1417, 612);
+            this.Controls.Add(this.Percentage);
             this.Controls.Add(this.cancelAction);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.progressBar);
@@ -325,6 +338,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button cancelAction;
+        private System.Windows.Forms.Label Percentage;
     }
 }
 

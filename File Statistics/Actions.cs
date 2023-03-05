@@ -11,22 +11,26 @@ using System.Windows.Forms;
 
 namespace File_Statistics
 {
-    internal class Actions
+    public class Actions
     {
         //dictionary with special czech characters
         Dictionary<char, char> Diacritics = new Dictionary<char, char>() { { 'á', 'a' }, { 'é', 'e' }, { 'ě', 'e' }, { 'í', 'i' }, { 'ž', 'z' },
                                                 { 'ý', 'y' }, { 'ó', 'o' }, { 'ú', 'u' }, { 'ů', 'u' }, { 'š', 's' }, 
                                                 { 'ř', 'r' }, { 'ď', 'd' }, { 'ť', 't' }, { 'ň', 'n' }, { 'č', 'c' }};
         public string FileContent { get; set; }
+        private int PercentDivider = 1;
 
-        public Actions(string FileContent)
+        public Actions()
         {
-            this.FileContent = FileContent;
         }
 
         public void RemoveDiacritics(ProgressBar progressBar, BackgroundWorker bw)
         {
-            int tenthPercent = FileContent.Length / 10000;
+            if (FileContent.Length > 1000)
+                PercentDivider = FileContent.Length / 1000;
+            else if(FileContent.Length > 100)
+                PercentDivider = FileContent.Length / 100;
+            
             //using stringbuilder to create new string
             StringBuilder NewFileContent = new StringBuilder(FileContent);
             for (int i = 0; i < FileContent.Length; i++)
@@ -43,8 +47,9 @@ namespace File_Statistics
                     NewFileContent[i] = Char.ToUpper(Diacritics[Char.ToLower(c)]);
                 }
                 //performing one step in progress bar
-                if (i % tenthPercent == 0)
+                if (i % PercentDivider == 0)
                     bw.ReportProgress(i);
+
                 if (bw.CancellationPending)
                 {
                     break;
@@ -64,9 +69,12 @@ namespace File_Statistics
 
         public void RemovePunctuation(ProgressBar progressBar, BackgroundWorker bw)
         {
-            int tenthPercent = FileContent.Length / 1000;
             var NewFileContent = new StringBuilder();
             bool NextUpper = true;
+            if (FileContent.Length > 1000)
+                PercentDivider = FileContent.Length / 1000;
+            else if (FileContent.Length > 100)
+                PercentDivider = FileContent.Length / 100;
             for (int i=0; i < FileContent.Length; i++)
             {
                 char c = FileContent[i];
@@ -95,7 +103,7 @@ namespace File_Statistics
                     }
                 }
                 //performing one step in progress bar
-                if (i % tenthPercent == 0)
+                if (i % PercentDivider == 0)
                     bw.ReportProgress(i);
 
                 if (bw.CancellationPending)

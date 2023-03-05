@@ -19,11 +19,15 @@ namespace File_Statistics
         public FileManager()
         {
 
+        }
+
+        public bool Open()
+        {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 //filters and initial directories
-                openFileDialog.InitialDirectory = @"../"+Directory.GetCurrentDirectory();
-                openFileDialog.Filter = "txt files (*.txt)|*.txt";    
+                openFileDialog.InitialDirectory = @"../" + Directory.GetCurrentDirectory();
+                openFileDialog.Filter = "txt files (*.txt)|*.txt";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
 
@@ -40,10 +44,12 @@ namespace File_Statistics
                     {
                         fileContent = reader.ReadToEnd();
                     }
+                    return true;
                 }
+                else
+                    return false;
             }
         }
-
         //Function to copy opened file into directory selected
         public void Save()
         {
@@ -51,7 +57,7 @@ namespace File_Statistics
             {
                 saveFileDialog.InitialDirectory = Name;
                 saveFileDialog.Filter = "txt files (*.txt)|*.txt";
-                saveFileDialog.FileName = Name + " - Copy";
+                saveFileDialog.FileName = Path.GetFileName(Name) + " - Copy";
                 saveFileDialog.Title = "Save an text file";
                 saveFileDialog.RestoreDirectory = true;
 

@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace File_Statistics
 {
-    internal class Analyser
+    public class Analyser
     {
         public int words = 0;
         public int characters = 0;
         public int sentences = 0;
         public int lines = 0;
 
-        public Analyser(string FileContent)
+        public Analyser()
         {
         }
         public void Count(string FileContent)
@@ -23,7 +23,7 @@ namespace File_Statistics
             characters = FileContent.Length;
             lines = FileContent.Split('\n').Length;
             words = FileContent.Split(new char[] {' ', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries).Length;
-            sentences = FileContent.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Length - 1;
+            sentences = FileContent.Split(new char[] { '.', '?', '!' }).Length - 1;
 
         }
     }

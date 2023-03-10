@@ -57,6 +57,7 @@ namespace File_Statistics
             {
                 saveFileDialog.InitialDirectory = Name;
                 saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                //setting filename to original name plus - copy
                 saveFileDialog.FileName = Path.GetFileName(Name) + " - Copy";
                 saveFileDialog.Title = "Save an text file";
                 saveFileDialog.RestoreDirectory = true;

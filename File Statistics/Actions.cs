@@ -51,10 +51,9 @@ namespace File_Statistics
                     bw.ReportProgress(i);
 
                 if (bw.CancellationPending)
-                {
-                    break;
-                }
+                    return;
             }
+
             FileContent = NewFileContent.ToString();
 
         }
@@ -107,9 +106,7 @@ namespace File_Statistics
                     bw.ReportProgress(i);
 
                 if (bw.CancellationPending)
-                {
-                    break;
-                }
+                    return;
             }
             FileContent = NewFileContent.ToString();
         }
